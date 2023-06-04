@@ -1,0 +1,100 @@
+﻿Build1=Default,manshahr.farta.aria.ir
+File1=2.gif
+File2=back_ground.png
+File3=splash.bal
+File4=splash.gif
+FileGroup1=Default Group
+FileGroup2=Default Group
+FileGroup3=Default Group
+FileGroup4=Default Group
+Group=Default Group
+Library1=core
+Library2=gifdecoder
+Library3=xui
+Library4=javaobject
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~
+Module1=index
+NumberOfFiles=4
+NumberOfLibraries=4
+NumberOfModules=1
+Version=11.5
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: فردوس
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: True
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: false
+	#IncludeTitle: False
+#End Region
+
+Sub Process_Globals
+
+
+
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	Private gif_splash As ImageView
+	Dim gif As GifDecoder
+	Dim timer As Timer
+	Dim gif_name As String = "splash.gif"
+	Dim Frame As Int
+	Dim jo As JavaObject
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("splash")
+	jo.InitializeContext
+	jo.RunMethodJO("getWindow", Null).RunMethod("setStatusBarColor", Array(Colors.RGB(137,181,89)))
+	If File.Exists(File.DirInternal,gif_name) = False Then
+		File.Copy(File.DirAssets,gif_name,File.DirInternal,gif_name)
+	End If
+	timer.Initialize("timer",0)
+	ShowGifAnimation1(gif_name)
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub ShowGifAnimation1(filename As String )
+	Try
+		gif.DisposeFrames
+		gif.Load(File.DirInternal, filename)
+		timer.Interval = gif.Delay(0)
+		gif_splash.Bitmap = gif.Frame(0)
+		gif_splash.Gravity = Gravity.FILL
+		timer.Enabled = True
+	Catch
+		Msgbox(LastException,"خطا")
+	End Try
+
+End Sub
+Sub timer_Tick
+	Try
+		timer.Enabled = False
+		Frame = Frame + 1
+		If Frame >= gif.FrameCount Then
+			timer.Enabled=False
+			StartActivity(index)
+			Activity.Finish
+		End If
+		timer.Interval = gif.Delay(Frame)
+		gif_splash.Bitmap = gif.Frame(Frame)
+		timer.Enabled = True
+	Catch
+		timer.Enabled = False
+		Msgbox(LastException,"خطا")
+	End Try
+End Sub
