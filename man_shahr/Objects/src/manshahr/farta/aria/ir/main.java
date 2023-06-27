@@ -336,64 +336,118 @@ public class main extends Activity implements B4AActivity{
     }
 
 public anywheresoftware.b4a.keywords.Common __c = null;
-public anywheresoftware.b4a.objects.ImageViewWrapper _gif_splash = null;
-public anywheresoftware.b4a.agraham.gifdecoder.GifDecoder _gif = null;
 public anywheresoftware.b4a.objects.Timer _timer = null;
-public static String _gif_name = "";
-public static int _frame = 0;
 public anywheresoftware.b4j.object.JavaObject _jo = null;
+public anywheresoftware.b4a.objects.ImageViewWrapper _splash = null;
+public anywheresoftware.b4a.objects.AnimationWrapper _anim = null;
+public anywheresoftware.b4a.objects.AnimationWrapper _anim_move = null;
+public anywheresoftware.b4a.objects.ImageViewWrapper _text_splash = null;
 public manshahr.farta.aria.ir.index _index = null;
+public manshahr.farta.aria.ir.animactivity _animactivity = null;
 
 public static boolean isAnyActivityVisible() {
     boolean vis = false;
 vis = vis | (main.mostCurrent != null);
 vis = vis | (index.mostCurrent != null);
 return vis;}
-public static String  _activity_create(boolean _firsttime) throws Exception{
- //BA.debugLineNum = 31;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
- //BA.debugLineNum = 32;BA.debugLine="Activity.LoadLayout(\"splash\")";
-mostCurrent._activity.LoadLayout("splash",mostCurrent.activityBA);
- //BA.debugLineNum = 33;BA.debugLine="jo.InitializeContext";
-mostCurrent._jo.InitializeContext(processBA);
- //BA.debugLineNum = 34;BA.debugLine="jo.RunMethodJO(\"getWindow\", Null).RunMethod(\"setS";
-mostCurrent._jo.RunMethodJO("getWindow",(Object[])(anywheresoftware.b4a.keywords.Common.Null)).RunMethod("setStatusBarColor",new Object[]{(Object)(anywheresoftware.b4a.keywords.Common.Colors.RGB((int) (137),(int) (181),(int) (89)))});
- //BA.debugLineNum = 35;BA.debugLine="If File.Exists(File.DirInternal,gif_name) = False";
-if (anywheresoftware.b4a.keywords.Common.File.Exists(anywheresoftware.b4a.keywords.Common.File.getDirInternal(),mostCurrent._gif_name)==anywheresoftware.b4a.keywords.Common.False) { 
- //BA.debugLineNum = 36;BA.debugLine="File.Copy(File.DirAssets,gif_name,File.DirIntern";
-anywheresoftware.b4a.keywords.Common.File.Copy(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),mostCurrent._gif_name,anywheresoftware.b4a.keywords.Common.File.getDirInternal(),mostCurrent._gif_name);
- };
- //BA.debugLineNum = 38;BA.debugLine="timer.Initialize(\"timer\",0)";
-mostCurrent._timer.Initialize(processBA,"timer",(long) (0));
- //BA.debugLineNum = 39;BA.debugLine="ShowGifAnimation1(gif_name)";
-_showgifanimation1(mostCurrent._gif_name);
- //BA.debugLineNum = 40;BA.debugLine="End Sub";
-return "";
+public static void  _activity_create(boolean _firsttime) throws Exception{
+ResumableSub_Activity_Create rsub = new ResumableSub_Activity_Create(null,_firsttime);
+rsub.resume(processBA, null);
+}
+public static class ResumableSub_Activity_Create extends BA.ResumableSub {
+public ResumableSub_Activity_Create(manshahr.farta.aria.ir.main parent,boolean _firsttime) {
+this.parent = parent;
+this._firsttime = _firsttime;
+}
+manshahr.farta.aria.ir.main parent;
+boolean _firsttime;
+
+@Override
+public void resume(BA ba, Object[] result) throws Exception{
+
+    while (true) {
+        switch (state) {
+            case -1:
+return;
+
+case 0:
+//C
+this.state = -1;
+ //BA.debugLineNum = 38;BA.debugLine="timer.Initialize(\"timer\",2300)";
+parent.mostCurrent._timer.Initialize(processBA,"timer",(long) (2300));
+ //BA.debugLineNum = 39;BA.debugLine="timer.Enabled=True";
+parent.mostCurrent._timer.setEnabled(anywheresoftware.b4a.keywords.Common.True);
+ //BA.debugLineNum = 41;BA.debugLine="Activity.LoadLayout(\"splash\")";
+parent.mostCurrent._activity.LoadLayout("splash",mostCurrent.activityBA);
+ //BA.debugLineNum = 43;BA.debugLine="anim_move.InitializeTranslate(\"anim\",0,15%y,0,0)";
+parent.mostCurrent._anim_move.InitializeTranslate(mostCurrent.activityBA,"anim",(float) (0),(float) (anywheresoftware.b4a.keywords.Common.PerYToCurrent((float) (15),mostCurrent.activityBA)),(float) (0),(float) (0));
+ //BA.debugLineNum = 44;BA.debugLine="anim_move.Duration = 400";
+parent.mostCurrent._anim_move.setDuration((long) (400));
+ //BA.debugLineNum = 45;BA.debugLine="anim_move.RepeatCount = 0";
+parent.mostCurrent._anim_move.setRepeatCount((int) (0));
+ //BA.debugLineNum = 46;BA.debugLine="anim_move.Start(splash)";
+parent.mostCurrent._anim_move.Start((android.view.View)(parent.mostCurrent._splash.getObject()));
+ //BA.debugLineNum = 47;BA.debugLine="text_splash.Visible= False";
+parent.mostCurrent._text_splash.setVisible(anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 48;BA.debugLine="Sleep(400)";
+anywheresoftware.b4a.keywords.Common.Sleep(mostCurrent.activityBA,this,(int) (400));
+this.state = 1;
+return;
+case 1:
+//C
+this.state = -1;
+;
+ //BA.debugLineNum = 49;BA.debugLine="anim.InitializeAlpha(\"anim\",0,1)";
+parent.mostCurrent._anim.InitializeAlpha(mostCurrent.activityBA,"anim",(float) (0),(float) (1));
+ //BA.debugLineNum = 50;BA.debugLine="anim.Duration = 500";
+parent.mostCurrent._anim.setDuration((long) (500));
+ //BA.debugLineNum = 51;BA.debugLine="anim.RepeatCount = 0";
+parent.mostCurrent._anim.setRepeatCount((int) (0));
+ //BA.debugLineNum = 52;BA.debugLine="anim.Start(text_splash)";
+parent.mostCurrent._anim.Start((android.view.View)(parent.mostCurrent._text_splash.getObject()));
+ //BA.debugLineNum = 53;BA.debugLine="text_splash.Visible= True";
+parent.mostCurrent._text_splash.setVisible(anywheresoftware.b4a.keywords.Common.True);
+ //BA.debugLineNum = 55;BA.debugLine="jo.InitializeContext";
+parent.mostCurrent._jo.InitializeContext(processBA);
+ //BA.debugLineNum = 56;BA.debugLine="jo.RunMethodJO(\"getWindow\", Null).RunMethod(\"setS";
+parent.mostCurrent._jo.RunMethodJO("getWindow",(Object[])(anywheresoftware.b4a.keywords.Common.Null)).RunMethod("setStatusBarColor",new Object[]{(Object)(anywheresoftware.b4a.keywords.Common.Colors.RGB((int) (137),(int) (181),(int) (89)))});
+ //BA.debugLineNum = 57;BA.debugLine="End Sub";
+if (true) break;
+
+            }
+        }
+    }
 }
 public static String  _activity_pause(boolean _userclosed) throws Exception{
- //BA.debugLineNum = 46;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
- //BA.debugLineNum = 48;BA.debugLine="End Sub";
+ //BA.debugLineNum = 72;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+ //BA.debugLineNum = 74;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_resume() throws Exception{
- //BA.debugLineNum = 42;BA.debugLine="Sub Activity_Resume";
- //BA.debugLineNum = 44;BA.debugLine="End Sub";
+ //BA.debugLineNum = 68;BA.debugLine="Sub Activity_Resume";
+ //BA.debugLineNum = 70;BA.debugLine="End Sub";
+return "";
+}
+public static String  _anim_animationend() throws Exception{
+ //BA.debugLineNum = 59;BA.debugLine="Sub anim_AnimationEnd";
+ //BA.debugLineNum = 66;BA.debugLine="End Sub";
 return "";
 }
 public static String  _globals() throws Exception{
- //BA.debugLineNum = 21;BA.debugLine="Sub Globals";
- //BA.debugLineNum = 23;BA.debugLine="Private gif_splash As ImageView";
-mostCurrent._gif_splash = new anywheresoftware.b4a.objects.ImageViewWrapper();
- //BA.debugLineNum = 24;BA.debugLine="Dim gif As GifDecoder";
-mostCurrent._gif = new anywheresoftware.b4a.agraham.gifdecoder.GifDecoder();
- //BA.debugLineNum = 25;BA.debugLine="Dim timer As Timer";
+ //BA.debugLineNum = 24;BA.debugLine="Sub Globals";
+ //BA.debugLineNum = 26;BA.debugLine="Dim timer As Timer";
 mostCurrent._timer = new anywheresoftware.b4a.objects.Timer();
- //BA.debugLineNum = 26;BA.debugLine="Dim gif_name As String = \"splash.gif\"";
-mostCurrent._gif_name = "splash.gif";
- //BA.debugLineNum = 27;BA.debugLine="Dim Frame As Int";
-_frame = 0;
- //BA.debugLineNum = 28;BA.debugLine="Dim jo As JavaObject";
+ //BA.debugLineNum = 27;BA.debugLine="Dim jo As JavaObject";
 mostCurrent._jo = new anywheresoftware.b4j.object.JavaObject();
- //BA.debugLineNum = 29;BA.debugLine="End Sub";
+ //BA.debugLineNum = 28;BA.debugLine="Private splash As ImageView";
+mostCurrent._splash = new anywheresoftware.b4a.objects.ImageViewWrapper();
+ //BA.debugLineNum = 29;BA.debugLine="Dim anim As Animation";
+mostCurrent._anim = new anywheresoftware.b4a.objects.AnimationWrapper();
+ //BA.debugLineNum = 30;BA.debugLine="Dim anim_move As Animation";
+mostCurrent._anim_move = new anywheresoftware.b4a.objects.AnimationWrapper();
+ //BA.debugLineNum = 34;BA.debugLine="Private text_splash As ImageView";
+mostCurrent._text_splash = new anywheresoftware.b4a.objects.ImageViewWrapper();
+ //BA.debugLineNum = 35;BA.debugLine="End Sub";
 return "";
 }
 
@@ -404,69 +458,35 @@ public static void initializeProcessGlobals() {
 		try {
 		        main._process_globals();
 index._process_globals();
+animactivity._process_globals();
 		
         } catch (Exception e) {
 			throw new RuntimeException(e);
 		}
     }
 }public static String  _process_globals() throws Exception{
- //BA.debugLineNum = 15;BA.debugLine="Sub Process_Globals";
- //BA.debugLineNum = 19;BA.debugLine="End Sub";
+ //BA.debugLineNum = 18;BA.debugLine="Sub Process_Globals";
+ //BA.debugLineNum = 22;BA.debugLine="End Sub";
 return "";
 }
-public static String  _showgifanimation1(String _filename) throws Exception{
- //BA.debugLineNum = 50;BA.debugLine="Sub ShowGifAnimation1(filename As String )";
- //BA.debugLineNum = 51;BA.debugLine="Try";
-try { //BA.debugLineNum = 52;BA.debugLine="gif.DisposeFrames";
-mostCurrent._gif.DisposeFrames();
- //BA.debugLineNum = 53;BA.debugLine="gif.Load(File.DirInternal, filename)";
-mostCurrent._gif.Load(anywheresoftware.b4a.keywords.Common.File.getDirInternal(),_filename);
- //BA.debugLineNum = 54;BA.debugLine="timer.Interval = gif.Delay(0)";
-mostCurrent._timer.setInterval((long) (mostCurrent._gif.Delay((int) (0))));
- //BA.debugLineNum = 55;BA.debugLine="gif_splash.Bitmap = gif.Frame(0)";
-mostCurrent._gif_splash.setBitmap(mostCurrent._gif.Frame((int) (0)));
- //BA.debugLineNum = 56;BA.debugLine="gif_splash.Gravity = Gravity.FILL";
-mostCurrent._gif_splash.setGravity(anywheresoftware.b4a.keywords.Common.Gravity.FILL);
- //BA.debugLineNum = 57;BA.debugLine="timer.Enabled = True";
-mostCurrent._timer.setEnabled(anywheresoftware.b4a.keywords.Common.True);
- } 
-       catch (Exception e9) {
-			processBA.setLastException(e9); //BA.debugLineNum = 59;BA.debugLine="Msgbox(LastException,\"خطا\")";
-anywheresoftware.b4a.keywords.Common.Msgbox(BA.ObjectToCharSequence(anywheresoftware.b4a.keywords.Common.LastException(mostCurrent.activityBA).getObject()),BA.ObjectToCharSequence("خطا"),mostCurrent.activityBA);
- };
- //BA.debugLineNum = 62;BA.debugLine="End Sub";
+public static String  _splash_click() throws Exception{
+ //BA.debugLineNum = 82;BA.debugLine="Private Sub splash_Click";
+ //BA.debugLineNum = 83;BA.debugLine="anim.Start(splash)";
+mostCurrent._anim.Start((android.view.View)(mostCurrent._splash.getObject()));
+ //BA.debugLineNum = 84;BA.debugLine="anim.Start(text_splash)";
+mostCurrent._anim.Start((android.view.View)(mostCurrent._text_splash.getObject()));
+ //BA.debugLineNum = 85;BA.debugLine="End Sub";
 return "";
 }
 public static String  _timer_tick() throws Exception{
- //BA.debugLineNum = 63;BA.debugLine="Sub timer_Tick";
- //BA.debugLineNum = 64;BA.debugLine="Try";
-try { //BA.debugLineNum = 65;BA.debugLine="timer.Enabled = False";
-mostCurrent._timer.setEnabled(anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 66;BA.debugLine="Frame = Frame + 1";
-_frame = (int) (_frame+1);
- //BA.debugLineNum = 67;BA.debugLine="If Frame >= gif.FrameCount Then";
-if (_frame>=mostCurrent._gif.getFrameCount()) { 
- //BA.debugLineNum = 68;BA.debugLine="timer.Enabled=False";
-mostCurrent._timer.setEnabled(anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 69;BA.debugLine="StartActivity(index)";
+ //BA.debugLineNum = 76;BA.debugLine="Sub timer_Tick";
+ //BA.debugLineNum = 77;BA.debugLine="StartActivity(index)";
 anywheresoftware.b4a.keywords.Common.StartActivity(processBA,(Object)(mostCurrent._index.getObject()));
- //BA.debugLineNum = 70;BA.debugLine="Activity.Finish";
+ //BA.debugLineNum = 78;BA.debugLine="AnimActivity.setAnimActivity(\"fade1\", \"fade2\")";
+mostCurrent._animactivity._setanimactivity /*String*/ (mostCurrent.activityBA,"fade1","fade2");
+ //BA.debugLineNum = 79;BA.debugLine="Activity.Finish";
 mostCurrent._activity.Finish();
- };
- //BA.debugLineNum = 72;BA.debugLine="timer.Interval = gif.Delay(Frame)";
-mostCurrent._timer.setInterval((long) (mostCurrent._gif.Delay(_frame)));
- //BA.debugLineNum = 73;BA.debugLine="gif_splash.Bitmap = gif.Frame(Frame)";
-mostCurrent._gif_splash.setBitmap(mostCurrent._gif.Frame(_frame));
- //BA.debugLineNum = 74;BA.debugLine="timer.Enabled = True";
-mostCurrent._timer.setEnabled(anywheresoftware.b4a.keywords.Common.True);
- } 
-       catch (Exception e13) {
-			processBA.setLastException(e13); //BA.debugLineNum = 76;BA.debugLine="timer.Enabled = False";
-mostCurrent._timer.setEnabled(anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 77;BA.debugLine="Msgbox(LastException,\"خطا\")";
-anywheresoftware.b4a.keywords.Common.Msgbox(BA.ObjectToCharSequence(anywheresoftware.b4a.keywords.Common.LastException(mostCurrent.activityBA).getObject()),BA.ObjectToCharSequence("خطا"),mostCurrent.activityBA);
- };
- //BA.debugLineNum = 79;BA.debugLine="End Sub";
+ //BA.debugLineNum = 80;BA.debugLine="End Sub";
 return "";
 }
 }

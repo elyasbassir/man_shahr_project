@@ -25,7 +25,7 @@ public class index extends Activity implements B4AActivity{
     ActivityWrapper _activity;
     java.util.ArrayList<B4AMenuItem> menuItems;
 	public static final boolean fullScreen = false;
-	public static final boolean includeTitle = true;
+	public static final boolean includeTitle = false;
     public static WeakReference<Activity> previousOne;
     public static boolean dontPause;
 
@@ -336,7 +336,14 @@ public class index extends Activity implements B4AActivity{
     }
 
 public anywheresoftware.b4a.keywords.Common __c = null;
+public anywheresoftware.b4a.objects.AnimationWrapper _anim = null;
+public anywheresoftware.b4a.objects.AnimationWrapper _anim_hidden = null;
+public anywheresoftware.b4a.objects.AnimationWrapper _anim_show = null;
+public anywheresoftware.b4a.objects.WebViewWrapper _slider = null;
+public anywheresoftware.b4a.objects.ImageViewWrapper _image_loading = null;
+public anywheresoftware.b4a.objects.PanelWrapper _loading = null;
 public manshahr.farta.aria.ir.main _main = null;
+public manshahr.farta.aria.ir.animactivity _animactivity = null;
 
 public static void initializeProcessGlobals() {
              try {
@@ -346,28 +353,108 @@ public static void initializeProcessGlobals() {
             }
 }
 public static String  _activity_create(boolean _firsttime) throws Exception{
- //BA.debugLineNum = 18;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
- //BA.debugLineNum = 22;BA.debugLine="End Sub";
+ //BA.debugLineNum = 27;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+ //BA.debugLineNum = 28;BA.debugLine="Activity.LoadLayout(\"index\")";
+mostCurrent._activity.LoadLayout("index",mostCurrent.activityBA);
+ //BA.debugLineNum = 29;BA.debugLine="slider.LoadUrl(\"https://man-shahr.farta-aria.ir/s";
+mostCurrent._slider.LoadUrl("https://man-shahr.farta-aria.ir/slider/cd1d28dcc4617861e67b4f9dac096bbec895e4f7");
+ //BA.debugLineNum = 30;BA.debugLine="slider.ZoomEnabled = False";
+mostCurrent._slider.setZoomEnabled(anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 32;BA.debugLine="anim_hidden.InitializeAlpha(\"anim_hidden\",1,0)";
+mostCurrent._anim_hidden.InitializeAlpha(mostCurrent.activityBA,"anim_hidden",(float) (1),(float) (0));
+ //BA.debugLineNum = 33;BA.debugLine="anim_hidden.Duration = 600";
+mostCurrent._anim_hidden.setDuration((long) (600));
+ //BA.debugLineNum = 34;BA.debugLine="anim_hidden.RepeatCount=0";
+mostCurrent._anim_hidden.setRepeatCount((int) (0));
+ //BA.debugLineNum = 36;BA.debugLine="anim.InitializeTranslate(\"anim\",2%x,1%y,3%x,4%y)";
+mostCurrent._anim.InitializeTranslate(mostCurrent.activityBA,"anim",(float) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (2),mostCurrent.activityBA)),(float) (anywheresoftware.b4a.keywords.Common.PerYToCurrent((float) (1),mostCurrent.activityBA)),(float) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (3),mostCurrent.activityBA)),(float) (anywheresoftware.b4a.keywords.Common.PerYToCurrent((float) (4),mostCurrent.activityBA)));
+ //BA.debugLineNum = 37;BA.debugLine="anim.Duration=1000";
+mostCurrent._anim.setDuration((long) (1000));
+ //BA.debugLineNum = 38;BA.debugLine="anim.RepeatMode = anim.REPEAT_REVERSE";
+mostCurrent._anim.setRepeatMode(mostCurrent._anim.REPEAT_REVERSE);
+ //BA.debugLineNum = 39;BA.debugLine="anim.RepeatCount=-1";
+mostCurrent._anim.setRepeatCount((int) (-1));
+ //BA.debugLineNum = 40;BA.debugLine="anim.Start(Image_loading)";
+mostCurrent._anim.Start((android.view.View)(mostCurrent._image_loading.getObject()));
+ //BA.debugLineNum = 41;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_pause(boolean _userclosed) throws Exception{
- //BA.debugLineNum = 28;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
- //BA.debugLineNum = 30;BA.debugLine="End Sub";
+ //BA.debugLineNum = 48;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+ //BA.debugLineNum = 50;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_resume() throws Exception{
- //BA.debugLineNum = 24;BA.debugLine="Sub Activity_Resume";
- //BA.debugLineNum = 26;BA.debugLine="End Sub";
+ //BA.debugLineNum = 44;BA.debugLine="Sub Activity_Resume";
+ //BA.debugLineNum = 46;BA.debugLine="End Sub";
 return "";
 }
 public static String  _globals() throws Exception{
- //BA.debugLineNum = 12;BA.debugLine="Sub Globals";
- //BA.debugLineNum = 16;BA.debugLine="End Sub";
+ //BA.debugLineNum = 16;BA.debugLine="Sub Globals";
+ //BA.debugLineNum = 17;BA.debugLine="Dim anim As Animation";
+mostCurrent._anim = new anywheresoftware.b4a.objects.AnimationWrapper();
+ //BA.debugLineNum = 18;BA.debugLine="Dim anim_hidden As Animation";
+mostCurrent._anim_hidden = new anywheresoftware.b4a.objects.AnimationWrapper();
+ //BA.debugLineNum = 19;BA.debugLine="Dim anim_show As Animation";
+mostCurrent._anim_show = new anywheresoftware.b4a.objects.AnimationWrapper();
+ //BA.debugLineNum = 20;BA.debugLine="Private slider As WebView";
+mostCurrent._slider = new anywheresoftware.b4a.objects.WebViewWrapper();
+ //BA.debugLineNum = 21;BA.debugLine="Private Image_loading As ImageView";
+mostCurrent._image_loading = new anywheresoftware.b4a.objects.ImageViewWrapper();
+ //BA.debugLineNum = 22;BA.debugLine="Private loading As Panel";
+mostCurrent._loading = new anywheresoftware.b4a.objects.PanelWrapper();
+ //BA.debugLineNum = 23;BA.debugLine="End Sub";
 return "";
 }
 public static String  _process_globals() throws Exception{
- //BA.debugLineNum = 6;BA.debugLine="Sub Process_Globals";
- //BA.debugLineNum = 10;BA.debugLine="End Sub";
+ //BA.debugLineNum = 9;BA.debugLine="Sub Process_Globals";
+ //BA.debugLineNum = 13;BA.debugLine="End Sub";
 return "";
+}
+public static void  _slider_pagefinished(String _url) throws Exception{
+ResumableSub_slider_PageFinished rsub = new ResumableSub_slider_PageFinished(null,_url);
+rsub.resume(processBA, null);
+}
+public static class ResumableSub_slider_PageFinished extends BA.ResumableSub {
+public ResumableSub_slider_PageFinished(manshahr.farta.aria.ir.index parent,String _url) {
+this.parent = parent;
+this._url = _url;
+}
+manshahr.farta.aria.ir.index parent;
+String _url;
+
+@Override
+public void resume(BA ba, Object[] result) throws Exception{
+
+    while (true) {
+        switch (state) {
+            case -1:
+return;
+
+case 0:
+//C
+this.state = -1;
+ //BA.debugLineNum = 56;BA.debugLine="anim_hidden.Start(loading)";
+parent.mostCurrent._anim_hidden.Start((android.view.View)(parent.mostCurrent._loading.getObject()));
+ //BA.debugLineNum = 57;BA.debugLine="anim_hidden.Start(Image_loading)";
+parent.mostCurrent._anim_hidden.Start((android.view.View)(parent.mostCurrent._image_loading.getObject()));
+ //BA.debugLineNum = 58;BA.debugLine="Sleep(600)";
+anywheresoftware.b4a.keywords.Common.Sleep(mostCurrent.activityBA,this,(int) (600));
+this.state = 1;
+return;
+case 1:
+//C
+this.state = -1;
+;
+ //BA.debugLineNum = 59;BA.debugLine="loading.Visible=False";
+parent.mostCurrent._loading.setVisible(anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 60;BA.debugLine="Image_loading.Visible=False";
+parent.mostCurrent._image_loading.setVisible(anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 61;BA.debugLine="End Sub";
+if (true) break;
+
+            }
+        }
+    }
 }
 }

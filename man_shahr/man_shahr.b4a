@@ -1,31 +1,51 @@
 ﻿Build1=Default,manshahr.farta.aria.ir
 File1=2.gif
-File2=back_ground.png
-File3=splash.bal
-File4=splash.gif
+File10=splash.gif
+File11=text logo.png
+File2=4760012.jpg
+File3=back_ground.png
+File4=icon.png
+File5=icons8-location-64.png
+File6=index.bal
+File7=just logo.png
+File8=Lalezar-Regular.ttf
+File9=splash.bal
 FileGroup1=Default Group
+FileGroup10=Default Group
+FileGroup11=Default Group
 FileGroup2=Default Group
 FileGroup3=Default Group
 FileGroup4=Default Group
+FileGroup5=Default Group
+FileGroup6=Default Group
+FileGroup7=Default Group
+FileGroup8=Default Group
+FileGroup9=Default Group
 Group=Default Group
-Library1=core
-Library2=gifdecoder
-Library3=xui
+Library1=androidslider
+Library2=animation
+Library3=core
 Library4=javaobject
+Library5=reflection
+Library6=webviewextras
+Library7=xui
+Library8=webviewsettings
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~
-Module1=index
-NumberOfFiles=4
-NumberOfLibraries=4
-NumberOfModules=1
+Module1=AnimActivity
+Module2=index
+NumberOfFiles=11
+NumberOfLibraries=8
+NumberOfModules=2
 Version=11.5
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: فردوس
 	#VersionCode: 1
 	#VersionName: 
-	'SupportedOrientations possible values: unspecified, landscape or portrait.
+
 	#SupportedOrientations: portrait
 	#CanInstallToExternalStorage: True
+	
 #End Region
 
 #Region  Activity Attributes 
@@ -33,31 +53,56 @@ Version=11.5
 	#IncludeTitle: False
 #End Region
 
+#AdditionalRes: ..\AnimActivity
+
 Sub Process_Globals
 
-
+	
 
 End Sub
 
 Sub Globals
-	'These global variables will be redeclared each time the activity is created.
-	Private gif_splash As ImageView
-	Dim gif As GifDecoder
+
 	Dim timer As Timer
-	Dim gif_name As String = "splash.gif"
-	Dim Frame As Int
 	Dim jo As JavaObject
+	Private splash As ImageView
+	Dim anim As Animation
+	Dim anim_move As Animation
+	
+	
+
+	Private text_splash As ImageView
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
+	timer.Initialize("timer",2300)
+	timer.Enabled=True
+
 	Activity.LoadLayout("splash")
+	
+	anim_move.InitializeTranslate("anim",0,15%y,0,0)
+	anim_move.Duration = 400
+	anim_move.RepeatCount = 0
+	anim_move.Start(splash)
+	text_splash.Visible= False
+	Sleep(400)
+	anim.InitializeAlpha("anim",0,1)
+	anim.Duration = 500
+	anim.RepeatCount = 0
+	anim.Start(text_splash)
+	text_splash.Visible= True
+	
 	jo.InitializeContext
 	jo.RunMethodJO("getWindow", Null).RunMethod("setStatusBarColor", Array(Colors.RGB(137,181,89)))
-	If File.Exists(File.DirInternal,gif_name) = False Then
-		File.Copy(File.DirAssets,gif_name,File.DirInternal,gif_name)
-	End If
-	timer.Initialize("timer",0)
-	ShowGifAnimation1(gif_name)
+End Sub
+
+Sub anim_AnimationEnd
+
+'Sleep(1000)
+'StartActivity(index)
+'Activity.Finish
+
+	
 End Sub
 
 Sub Activity_Resume
@@ -68,33 +113,13 @@ Sub Activity_Pause (UserClosed As Boolean)
 
 End Sub
 
-Sub ShowGifAnimation1(filename As String )
-	Try
-		gif.DisposeFrames
-		gif.Load(File.DirInternal, filename)
-		timer.Interval = gif.Delay(0)
-		gif_splash.Bitmap = gif.Frame(0)
-		gif_splash.Gravity = Gravity.FILL
-		timer.Enabled = True
-	Catch
-		Msgbox(LastException,"خطا")
-	End Try
-
-End Sub
 Sub timer_Tick
-	Try
-		timer.Enabled = False
-		Frame = Frame + 1
-		If Frame >= gif.FrameCount Then
-			timer.Enabled=False
-			StartActivity(index)
-			Activity.Finish
-		End If
-		timer.Interval = gif.Delay(Frame)
-		gif_splash.Bitmap = gif.Frame(Frame)
-		timer.Enabled = True
-	Catch
-		timer.Enabled = False
-		Msgbox(LastException,"خطا")
-	End Try
+	StartActivity(index)
+	AnimActivity.setAnimActivity("fade1", "fade2")
+	Activity.Finish
+End Sub
+
+Private Sub splash_Click
+	anim.Start(splash)
+	anim.Start(text_splash)
 End Sub
